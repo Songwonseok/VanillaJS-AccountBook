@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "j098",
+    "password": "boostcamp",
+    "database": "accountBook",
+    "host": "115.85.182.190",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "j098",
+    "password": "boostcamp",
+    "database": "accountBook",
+    "host": "115.85.182.190",
+    "dialect": "mysql"
+  }
+}
