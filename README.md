@@ -15,7 +15,7 @@
   - [x] DB 설치
 - [x] 주간 계획서 작성
 - [x] github 기획 설정
-  - [ ] milestone을 주간별로 만든다.
+  - [x] milestone을 주간별로 만든다.
   - [x] 개발해야 할 기능(feature)을 깃헙 issue항목에 등록한다.
 - [x] express 설치
   - [x] [선택] 보일러 플레이트 clone
@@ -24,10 +24,10 @@
 ### 월 10/05
 
 - [ ] 서버 자동배포를 적용한다.
-- [ ] DB 설계
-  - [ ] ERD 작성
-    - [ ] ERD 작성을 선행 후 DB를 설계한다.
-  - [ ] [선택] Sequelize ORM을 적용한다.
+- [x] DB 설계
+  - [x] ERD 작성
+    - [x] ERD 작성을 선행 후 DB를 설계한다.
+  - [x] [선택] Sequelize ORM을 적용한다.
 - [ ] API 구현
   - [ ] 백엔드는 JSON 기반의 Web API로 응답.
 
@@ -69,3 +69,9 @@
 - [선택] passport + Oauth + JWT를 이용해서 인증한다.
 - [선택] Sequelize ORM을 적용한다.
 - 서버 자동배포를 적용한다.
+
+
+
+## ERD
+
+![J20_ERD](https://user-images.githubusercontent.com/7006837/95067248-8115fa00-073e-11eb-89cd-f6219e0e27bc.png)
