@@ -1,9 +1,12 @@
-var express = require('express');
-var router = express.Router();
-const UserRepository = require('../repositories/users.repository');
+const express = require('express');
+const router = express.Router();
+const user = require('./uesr/user.routes')
+
 /* GET home page. */
-router.get('/', async (req, res, next) => {
-    res.json(await UserRepository.selectAll())
+router.get('/', function (req, res, next) {
+    res.render('index', { title: 'Express' });
 });
+
+router.use('/api/user', user);
 
 module.exports = router;

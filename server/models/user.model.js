@@ -10,7 +10,7 @@ module.exports = class User extends Sequelize.Model {
                     unique: true,
                 },
                 password: {
-                    type: DataTypes.STRING(45),
+                    type: DataTypes.STRING(100),
                     allowNull: false,
                 },
                 name: {
