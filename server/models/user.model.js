@@ -28,9 +28,5 @@ module.exports = class User extends Sequelize.Model {
             }
         );
     }
-    static associate(db) {
-        db.User.hasMany(db.UserToPayment, { foreignKey: "user_id", sourceKey: "id" });
-        db.User.hasMany(db.Transaction, { foreignKey: "user_id", sourceKey: "id" });
-    }
 };
 // 출처 : https://loy124.tistory.com/294

@@ -21,7 +21,6 @@ module.exports = class Category extends Sequelize.Model {
     }
     static associate(db) {
         db.Category.belongsTo(db.Classification, { foreignKey: "classification_id", targetKey: "id" });
-        db.Category.hasMany(db.Transaction, { foreignKey: "user_id", sourceKey: "id" });
     }
 };
 // 출처 : https://loy124.tistory.com/294
