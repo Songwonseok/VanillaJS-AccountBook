@@ -2,13 +2,9 @@ const { User } = require('../models');
 
 class UserRepository {
     constructor(){}
-    SELECT(id) {
+    selectOne(id) {
         return new Promise((resolve, reject) => {
-            User.find({
-                where: {
-                    id: id,
-                }
-            })
+            User.findByPk(id)
             .then(result => {
                 resolve(result);
             })
@@ -18,9 +14,9 @@ class UserRepository {
         })
     }
 
-    SELECT_BY_USERID(userid) {
+    selectByUserid(userid) {
         return new Promise((resolve, reject) => {
-            User.find({
+            User.findOne({
                 where: {
                     userid: userid,
                 }
@@ -34,11 +30,10 @@ class UserRepository {
         })
     }
 
-    INSERT(userDTO) {
+    insert(userDTO) {
         return new Promise((resolve, reject) => {
             User.create({userid: userDTO.userid, password: userDTO.password, name: userDTO.name})
                 .then(result => {
-                    console.log(result);
                     resolve(result);
                 })
                 .catch(err => {

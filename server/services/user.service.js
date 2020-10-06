@@ -1,28 +1,49 @@
 const UserRepository = require('../repositories/user.repository');
 const bcrypt = require('bcrypt');
 const saltRounds = 10; // 값이 높을 수록 비용 소요가 큼
+const jwt = require('jsonwebtoken');
 
 class UserService {
     constructor() {
         this.userRepo = new UserRepository();
     }
 
-    async findOne(user_id) {
+    async findUser(user_id) {
         try {
-            const userDTO = await this.userRepo.SELECT(user_id);
+            const userDTO = await this.userRepo.selectOne(user_id);
             return userDTO;
         } catch (err) {
             throw new Error('유저 조회 실패');
         }
     }
 
-    async create(userDTO) {
+    async createUser(userDTO) {
         try {
             userDTO.password = await getHash(userDTO.password);
-            const insertUser = await this.userRepo.INSERT(userDTO);
+            const insertUser = await this.userRepo.insert(userDTO);
             return insertUser;
         } catch (err) {
             throw err
+        }
+    }
+
+    async checkValid(loginForm) {
+        try {
+            const user = await this.userRepo.selectByUserid(loginForm.email);
+            // 1. ID 체크
+            if (!user) {
+                throw new Error('존재하지 않는 email입니다.')
+            } else {
+                // 2. Password 체크
+                bcrypt.compare(loginForm.password, user.password, (err, isMatch) => {
+                    if (!isMatch)
+                        throw new Error('비밀번호가 틀렸습니다.')
+                });
+                // 3. ID와 Password가 맞다면 세션에 추가하고 Cookie 생성
+                return user;
+            }
+        } catch (err) {
+            throw err;
         }
     }
 }
