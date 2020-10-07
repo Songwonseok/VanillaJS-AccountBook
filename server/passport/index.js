@@ -1,6 +1,6 @@
 const passport = require('passport');
 const { Strategy: LocalStrategy } = require('passport-local');
-const { ExtractJwt, Strategy: JWTStrategy } = require('passport-jwt');
+const { Strategy: JWTStrategy } = require('passport-jwt');
 const bcrypt = require('bcrypt');
 
 const UserRepoitory = require('../repositories/user.repository');
@@ -23,15 +23,23 @@ const passportVerify = async (userid, password, done) => {
             done(null, user);
             return;
         }
-        done(null, false, { reason: '올바르지 않은 비밀번호 입니다.' });
+        done(null, false, { message: '올바르지 않은 비밀번호 입니다.' });
     } catch (error) {
         console.error(error);
         done(error);
     }
 };
 
+const cookieExtractor = function (req) {
+    var token = null;
+    if (req && req.cookies) {
+        token = req.cookies['jwt'];
+    }
+    return token;
+};
+
 const JWTConfig = {
-    jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+    jwtFromRequest: cookieExtractor ,
     secretOrKey: jwtConfig.secret,
 };
 

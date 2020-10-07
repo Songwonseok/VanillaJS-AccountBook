@@ -21,20 +21,20 @@ class UserController {
             }
         }
 
-        this.login = (req, res, next) => {
+        this.signin = (req, res, next) => {
             req.login(req.user, { session: false }, (loginError) => {
                 if (loginError) {
                     res.send(loginError);
                     return;
                 }
                 const jwt = generateToken(req.user);
-                res.cookie('token', jwt);
+                res.cookie('jwt', jwt);
                 res.status(201).send({ message: '로그인 success' });
             });
         }
 
         this.logout = async (req, res, next) => {
-            res.clearCookie('token');
+            res.clearCookie('jwt');
             res.status(200).send({message: '로그아웃 success'})
         }
     }
