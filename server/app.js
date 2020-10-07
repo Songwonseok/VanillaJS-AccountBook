@@ -7,7 +7,7 @@ const logger = require('morgan');
 const router = require('./api/index');
 const sequelize = require('./models/index').sequelize;
 const passport = require('passport');
-const passportCustom = require('./passport');
+const passportCustom = require('./middleware/passport');
 
 const app = express();
 sequelize.sync();

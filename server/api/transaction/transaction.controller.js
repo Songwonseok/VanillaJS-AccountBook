@@ -50,26 +50,6 @@ class TransactionController {
             }
         }
 
-        this.editTransaction = async (req, res, next) => {
-            try {
-                if (req.user.id != req.body.user_id)
-                    res.status(401).send({ message: '수정 권한이 없습니다.' })
-
-                const transactionDTO = {
-                    id: req.body.id,
-                    content: req.body.content,
-                    createDate: req.body.createDate,
-                    price: req.body.price,
-                    payment_id: req.body.payment_id,
-                    category_id: req.body.category_id
-                }
-                await this.tService.edit(transactionDTO);
-                res.status(200).send({ message: "거래내역 수정 성공" });
-            } catch (err) {
-                res.status(400).send(err.message);
-            }
-        }
-
         this.removeTransaction = async (req, res, next) => {
             try {
                 const transaction = await this.tService.get(req.params.id);

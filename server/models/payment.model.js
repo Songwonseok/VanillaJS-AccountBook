@@ -7,6 +7,7 @@ module.exports = class Payment extends Sequelize.Model {
                 name: {
                     type: DataTypes.STRING(45),
                     allowNull: false,
+                    unique: true
                 }
             },
             {
