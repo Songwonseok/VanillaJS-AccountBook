@@ -6,6 +6,16 @@ const jwtConfig = require("../../config/jwt");
 class UserController {
     constructor() {
         this.uService = new UserService();
+
+        this.findUser = async (req, res, next) => {
+            try {
+                const id = req.user.id;
+                const userDTO = await this.uService.findUser(id);
+                res.status(200).json(userDTO);
+            } catch (err) {
+                res.status(400).send(err.message);
+            }
+        }
         
         this.signup = async (req, res, next) => {
             try {
@@ -33,10 +43,11 @@ class UserController {
             });
         }
 
-        this.logout = async (req, res, next) => {
+        this.signout = async (req, res, next) => {
             res.clearCookie('jwt');
             res.status(200).send({message: '로그아웃 success'})
         }
+
     }
     
 }
@@ -47,8 +58,9 @@ const generateToken = (user) => {
         userid: user.userid,
         name: user.name 
     },
-    jwtConfig.secret,{
-        expiresIn: '30m'
+    jwtConfig.secret,
+    {
+        expiresIn: '1h'
     })
 }
 module.exports = new UserController();

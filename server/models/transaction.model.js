@@ -4,9 +4,8 @@ module.exports = class Transaction extends Sequelize.Model {
     static init(sequelize, DataTypes) {
         return super.init(
             {
-                name: {
+                content: {
                     type: DataTypes.STRING(45),
-                    allowNull: false,
                 },
                 createDate: {
                     type: DataTypes.DATE,
@@ -15,9 +14,6 @@ module.exports = class Transaction extends Sequelize.Model {
                 price: {
                     type: DataTypes.INTEGER.UNSIGNED,
                     allowNull: false, 
-                },
-                content: {
-                    type: DataTypes.STRING(45),
                 }
             },
             {

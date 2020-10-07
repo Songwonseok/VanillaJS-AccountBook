@@ -1,10 +1,18 @@
-const { User } = require('../models');
+const { User, Transaction, Category } = require('../models');
 
 class UserRepository {
     constructor(){}
     selectOne(id) {
         return new Promise((resolve, reject) => {
-            User.findByPk(id)
+            User.findByPk(id,
+                {
+                include:{
+                    model: Transaction,
+                    include:{
+                        model: Category
+                    }
+                }
+            })
             .then(result => {
                 resolve(result);
             })
@@ -32,7 +40,7 @@ class UserRepository {
 
     insert(userDTO) {
         return new Promise((resolve, reject) => {
-            User.create({userid: userDTO.userid, password: userDTO.password, name: userDTO.name})
+            User.create(userDTO)
                 .then(result => {
                     resolve(result);
                 })
