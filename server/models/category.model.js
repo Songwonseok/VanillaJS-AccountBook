@@ -23,5 +23,5 @@ module.exports = class Category extends Sequelize.Model {
         db.Category.belongsTo(db.Classification, { foreignKey: "classification_id", targetKey: "id" });
     }
 };
-// 출처 : https://loy124.tistory.com/294
+// 참고 : https://loy124.tistory.com/294
 

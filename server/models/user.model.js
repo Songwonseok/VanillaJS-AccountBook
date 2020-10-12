@@ -32,4 +32,4 @@ module.exports = class User extends Sequelize.Model {
         db.User.hasMany(db.Transaction, { foreignKey: "user_id", sourceKey: "id" });
     }
 };
-// 출처 : https://loy124.tistory.com/294
+// 참고 : https://loy124.tistory.com/294

@@ -24,5 +24,6 @@ module.exports = class Classification extends Sequelize.Model {
         db.Classification.hasMany(db.Category, { foreignKey: "classification_id", sourceKey: "id" });
     }
 };
-// 출처 : https://loy124.tistory.com/294
+
+// 참고 : https://loy124.tistory.com/294
 

@@ -21,4 +21,4 @@ module.exports = class UserToPayment extends Sequelize.Model {
         db.UserToPayment.belongsTo(db.User, { foreignKey: "user_id", targetKey: "id" });
     }
 };
-// 출처 : https://loy124.tistory.com/294
+// 참고 : https://loy124.tistory.com/294

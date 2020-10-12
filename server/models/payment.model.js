@@ -21,4 +21,4 @@ module.exports = class Payment extends Sequelize.Model {
         );
     }
 };
-// 출처 : https://loy124.tistory.com/294
+// 참고 : https://loy124.tistory.com/294

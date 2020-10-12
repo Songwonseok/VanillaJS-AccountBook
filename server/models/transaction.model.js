@@ -32,4 +32,4 @@ module.exports = class Transaction extends Sequelize.Model {
         db.Transaction.belongsTo(db.Category, { foreignKey: "category_id", targetKey: "id" });
     }
 };
-// 출처 : https://loy124.tistory.com/294
+// 참고 : https://loy124.tistory.com/294
