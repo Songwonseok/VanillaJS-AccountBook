@@ -1,6 +1,6 @@
 const passport = require('passport');
 const { Strategy: LocalStrategy } = require('passport-local');
-const { Strategy: JWTStrategy } = require('passport-jwt');
+const { Strategy: JWTStrategy, ExtractJwt } = require('passport-jwt');
 const bcrypt = require('bcrypt');
 
 const UserRepoitory = require('../repositories/user.repository');
@@ -39,7 +39,7 @@ const cookieExtractor = function (req) {
 };
 
 const JWTConfig = {
-    jwtFromRequest: cookieExtractor ,
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: jwtConfig.secret,
 };
 

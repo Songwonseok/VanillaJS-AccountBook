@@ -6,7 +6,7 @@ const transaction = require('./transaction/transaction.routes')
 const payment = require('./payment/payment.routes')
 
 router.get('/', function (req, res, next) {
-    res.render('index', { title: 'Express' });
+    res.render('index');
 });
 
 router.use('/api/user', user);

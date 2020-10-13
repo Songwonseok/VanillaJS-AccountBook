@@ -37,17 +37,10 @@ class UserController {
                     res.send(loginError);
                     return;
                 }
-                const jwt = generateToken(req.user);
-                res.cookie('jwt', jwt);
-                res.status(201).send({ message: '로그인 success' });
+                const token = generateToken(req.user);
+                res.status(201).send({ token: token });
             });
         }
-
-        this.signout = async (req, res, next) => {
-            res.clearCookie('jwt');
-            res.status(200).send({message: '로그아웃 success'})
-        }
-
     }
     
 }

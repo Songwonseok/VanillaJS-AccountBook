@@ -6,7 +6,6 @@ const passport = require('passport');
 
 router.post('/signup', userController.signup);
 router.post('/login', passport.authenticate('local',{session: false}),userController.signin);
-router.get('/logout', passport.authenticate('jwt', { session: false }), userController.signout);
 router.get('/', passport.authenticate('jwt', { session: false }), userController.findUser);
 
 
