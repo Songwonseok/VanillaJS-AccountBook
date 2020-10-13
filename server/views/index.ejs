@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>가계부</title>
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <h2> 배포 테스트!</h2>
-    <p>Welcome to <%= title %></p>
+    <header>
+      <span>가계부</span>
+    </header>
+
+    <nav>
+      <div name="month">
+        <button class="monthBtn" name="monthDown"><i class="fas fa-angle-left"></i></button>
+        <span class="no-select">6월</span>
+        <button class="monthBtn" name="monthUp"><i class="fas fa-angle-right"></i></button>
+      </div>
+
+      <ul>
+        <li class="selected"><a href="/">내역</a></li>
+        <li><a href="/calendar">달력</a></li>
+        <li><a href="/statistic">통계</a></li>
+       </ul>
+    </nav>
+
+    <div class="content-wrap"></div>
+
+
+    
+    <script type="module" src="/dist/app.bundle.js"></script>
   </body>
 </html>

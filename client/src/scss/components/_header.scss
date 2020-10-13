@@ -1,0 +1,11 @@
+@import '../common/variable';
+
+header {
+    background-color: $mintColor;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-size: x-large;
+    font-weight: bold;
+    color:white;
+}

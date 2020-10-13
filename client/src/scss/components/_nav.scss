@@ -1,0 +1,52 @@
+@import '../common/variable';
+
+nav {
+    height: 150px;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.monthBtn {
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+}
+
+ul {
+    list-style:none;
+    background-color: $backgrey;
+    height: 40px;
+    width: 50%;
+    border-radius: 32px;
+    display: flex;
+    align-content: space-between;
+    margin-top: 15px;
+
+}
+li {
+    margin: auto;
+    border : 0;
+    width: 31%;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 32px;
+    cursor: pointer;
+}
+
+li:hover {
+    background-color: white;
+}
+
+li a {
+    text-decoration: none;
+    color: black;
+}
+
+.selected {
+    background-color: white;
+}

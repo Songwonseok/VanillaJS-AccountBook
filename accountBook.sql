@@ -12,7 +12,8 @@ INSERT INTO category(name, classification_id) VALUES('카페/간식', 1);
 INSERT INTO category(name, classification_id) VALUES('문화/여가', 1);
 INSERT INTO category(name, classification_id) VALUES('의료/건강', 1);
 INSERT INTO category(name, classification_id) VALUES('교통', 1);
-INSERT INTO category(name, classification_id) VALUES('기타', 1);
+INSERT INTO category(name, classification_id) VALUES('미분류', 1);
 
 INSERT INTO category(name, classification_id) VALUES('월급', 2);
-INSERT INTO category(name, classification_id) VALUES('기타', 2);
+INSERT INTO category(name, classification_id) VALUES('용돈', 2);
+INSERT INTO category(name, classification_id) VALUES('기타수입', 2);
