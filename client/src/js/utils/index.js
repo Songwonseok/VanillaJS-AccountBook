@@ -1,12 +1,15 @@
 export const $ = (selector, base = document) => base.querySelector(selector)
 export const $All = (selector, base = document) => base.querySelectorAll(selector)
 
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcmlkIjoiYXNkZiIsIm5hbWUiOiJ0ZXN0ZXIiLCJpYXQiOjE2MDI1OTgyODAsImV4cCI6MTYwMjYwMTg4MH0.Lbk4xYf3Bn_GPVDbN-lGcApQFRsBD__5Q8uCeYoQkeA"
+
 export const getFetch = ((url) => {
     return fetch(url, {
         method: 'GET',
         mode: 'cors',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization' : `Bearer ${token}`
         }
     }).then((res) => res.json())
 })
