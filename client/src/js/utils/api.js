@@ -1,10 +1,10 @@
-export const $ = (selector, base = document) => base.querySelector(selector)
-export const $All = (selector, base = document) => base.querySelectorAll(selector)
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcmlkIjoiYXNkZiIsIm5hbWUiOiJ0ZXN0ZXIiLCJpYXQiOjE2MDI1OTgyODAsImV4cCI6MTYwMjYwMTg4MH0.Lbk4xYf3Bn_GPVDbN-lGcApQFRsBD__5Q8uCeYoQkeA"
 
-export const getFetch = ((url) => {
-    return fetch(url, {
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcmlkIjoiYXNkZiIsIm5hbWUiOiJ0ZXN0ZXIiLCJpYXQiOjE2MDI2NzM1MzAsImV4cCI6MTYwMjcxNjczMH0.Y8rx_QvAn7U986QzM7j5rd4hoQAljZoXDfkNdP_IbZY"
+const url = "http://localhost:3000"
+
+export const getTransactionList = (month) => {
+    return fetch(`${url}/api/transaction/${month}`, {
         method: 'GET',
         mode: 'cors',
         headers: {
@@ -12,7 +12,7 @@ export const getFetch = ((url) => {
             'Authorization' : `Bearer ${token}`
         }
     }).then((res) => res.json())
-})
+}
 
 export const postFetch = ((url, body) => {
     return fetch(url, {
