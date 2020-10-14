@@ -105,6 +105,7 @@ export default class NavView {
         switch (path) {
             case '/':
                 $root.innerHTML = this.listView.render(data);
+                this.listView.onEvent();
                 break;
             case '/calendar':
                 $root.innerHTML = `<h2>달력</h2>`
