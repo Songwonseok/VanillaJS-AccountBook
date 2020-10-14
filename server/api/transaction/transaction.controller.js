@@ -7,7 +7,8 @@ class TransactionController {
         this.findAccountBook = async (req, res, next) => {
             try {
                 const id = req.user.id;
-                const accountBook = await this.tService.getUserAccountBook(id);
+                const month = req.params.currMonth;
+                const accountBook = await this.tService.getUserAccountBook(id, month);
                 res.status(200).json(accountBook);
             } catch (err) {
                 res.status(400).send(err.message);

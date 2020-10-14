@@ -1,4 +1,6 @@
 const { Transaction, Payment, Category, Classification } = require('../models');
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 class TransactionRepository {
     constructor() { }
@@ -15,7 +17,7 @@ class TransactionRepository {
         })
     }
 
-    selectAllByUserid(user_id) {
+    selectAllByUserid(user_id, month) {
         return new Promise((resolve, reject) => {
             Transaction.findAll({
                 include: [{
@@ -32,7 +34,17 @@ class TransactionRepository {
                 }],
                     where: {
                         user_id: user_id,
-                    }
+                        createDate: {
+                            [Op.and]: [
+                                { [Op.gte]: `2020-${Number(month)}-01` }, 
+                                { [Op.lt]: `2020-${Number(month)+1}-01` }
+                            ]
+                        }
+                        
+                    },
+                    order: [
+                        ['createDate', 'DESC']
+                    ],
                 })
                 .then(result => {
                     resolve(result);

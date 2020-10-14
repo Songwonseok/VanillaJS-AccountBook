@@ -1,17 +1,19 @@
-class TransactionModel {
+import Observable from '../interface/observable'
+import { getTransactionList } from '../utils/api'
+
+class TransactionModel extends Observable {
     constructor(){
+        super();
         this.list = [];
-        this._observers = [];
     }
-    subscribe(observer) {
-        this._observers.push(observer);
+
+    getData = async (month) => {
+        this.list = await getTransactionList(month);
     }
-    unsubscribe(observer) {
-        this._observers = [...this._observers].filter(subscriber => subscriber !== observer);
-    }
-    notify(data) {
-        this._observers.forEach(observer => observer.update(data));
+
+    changeData = async (month) => {
+        this.list = await getTransactionList(month);
+        this.notify(this.list)
     }
 }
-
-export default TransactionModel;
+export default new TransactionModel();

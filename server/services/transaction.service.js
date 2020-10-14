@@ -14,9 +14,9 @@ class TransactionService {
         }
     }
 
-    async getUserAccountBook(user_id) {
+    async getUserAccountBook(user_id, month) {
         try {
-            const accountBook = await this.transactionRepo.selectAllByUserid(user_id);
+            const accountBook = await this.transactionRepo.selectAllByUserid(user_id, month);
             return accountBook;
         } catch (err) {
             throw new Error('가계부 조회 실패');
