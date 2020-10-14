@@ -37,7 +37,7 @@ class TransactionRepository {
                         createDate: {
                             [Op.and]: [
                                 { [Op.gte]: `2020-${Number(month)}-01` }, 
-                                { [Op.lt]: `2020-${Number(month)+1}-01` }
+                                { [Op.lt]: `${(Number(month) == 12)? '2021-01-01': '2020-'+String(Number(month)+1)+'-01'}` }
                             ]
                         }
                         
