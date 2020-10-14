@@ -30,13 +30,6 @@ const passportVerify = async (userid, password, done) => {
     }
 };
 
-const cookieExtractor = function (req) {
-    var token = null;
-    if (req && req.cookies) {
-        token = req.cookies['jwt'];
-    }
-    return token;
-};
 
 const JWTConfig = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
