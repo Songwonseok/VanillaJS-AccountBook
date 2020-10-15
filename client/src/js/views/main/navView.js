@@ -6,7 +6,6 @@ export default class NavView {
         this.currentMonth = new Date().getMonth() + 1;
         this.model = model;
         this.listView = new ListView(model);
-
         this.model.subscribe(this);
     }
 
@@ -26,7 +25,7 @@ export default class NavView {
 
     update = (data) => {
         const path = location.pathname;
-        this.popStateHandler(path, data);
+        this.viewMap(path, data);
     }
     // Push State
     onLink = () => {
@@ -47,6 +46,7 @@ export default class NavView {
 
     popStateHandler = () => {
         const path = location.pathname;
+        this.listView.filter.init();
         this.viewMap(path);
         this.setInsetStyle(path);
     }
@@ -101,7 +101,6 @@ export default class NavView {
 
     viewMap = (path, data=this.model.list) => {
         const $root = $('.content-wrap');
-
         switch (path) {
             case '/':
                 $root.innerHTML = this.listView.render(data);

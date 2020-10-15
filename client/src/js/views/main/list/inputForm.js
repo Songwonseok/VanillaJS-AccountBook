@@ -1,9 +1,11 @@
-import {$} from '@utils/common'
+import { $, numberWithCommas} from '@utils/common'
 import { addTransaction, editTransaction } from '@utils/api'
 import transactionModel from '@models/transactionModel'
 
-class InputForm {
-    constructor() {}
+export default class InputForm {
+    constructor(model) {
+        this.model = model;
+    }
 
     render(item=undefined) {
         if (item) 
@@ -15,9 +17,9 @@ class InputForm {
                         <span>
                             <label>분류</label>
                             <label class="box-radio-input"><input type="radio" name="typeBtn" value="1" checked="checked"><span>지출</span></label>
-                            <label class="box-radio-input"><input type="radio" name="typeBtn" value="2"><span>수입</span></label>
+                            <label class="box-radio-input income"><input type="radio" name="typeBtn" value="2"><span>수입</span></label>
                         </span>
-                        <button class="resetBtn">내용 지우기</button>
+                        <span class="resetBtn">내용 지우기</span>
                     </div>
 
                     <div class="selectContainer">
@@ -60,35 +62,16 @@ class InputForm {
                     <button class="submitBtn disabled" disabled="true">확인</button>
                 </form>`
     }
-/*
-    {
-        "id": 13,
-        "content": "123",
-        "createDate": "2020-10-15T00:00:00.000Z",
-        "price": 300000,
-        "user_id": 1,
-        "payment_id": 3,
-        "category_id": 9,
-        "Payment": {
-            "name": "카카오카드"
-        },
-        "Category": {
-            "name": "월급",
-            "Classification": {
-                "name": "수입"
-            }
-        }
-    }
-*/
+
     editForm = (item) => {
         let render = `<form>
                     <div class="inputClassification">
                         <span>
                             <label>분류</label>
                             <label class="box-radio-input"><input type="radio" name="typeBtn" value="1" ${(item.Category.Classification.name === '지출')?'checked="checked"':''}><span>지출</span></label>
-                            <label class="box-radio-input"><input type="radio" name="typeBtn" value="2" ${(item.Category.Classification.name === '수입') ? 'checked="checked"' : ''}><span>수입</span></label>
+                            <label class="box-radio-input income"><input type="radio" name="typeBtn" value="2" ${(item.Category.Classification.name === '수입') ? 'checked="checked"' : ''}><span>수입</span></label>
                         </span>
-                        <button class="deleteBtn"  data-id="${item.id}">삭제</button>
+                        <span class="deleteBtn"  data-id="${item.id}">삭제</span>
                     </div>
 
                     <div class="selectContainer">
@@ -125,7 +108,7 @@ class InputForm {
                     <div class="textContainer">
                     <span>
                         <label>금액</label>
-                        <label><input class="inputPrice" type="text" name="price" value="${this.numberWithCommas(item.price.toString())}">원</label>
+                        <label><input class="inputPrice" type="text" name="price" value="${numberWithCommas(item.price.toString())}">원</label>
                     </span>
                     <span>
                         <label>내용</label>
@@ -162,14 +145,16 @@ class InputForm {
 
     onDelete = async (e) => {
         e.preventDefault();
-        const id = e.target.dataset.id;
-        await transactionModel.deleteItem(id);
+        if(confirm('정말 삭제하시겠습니까?')){
+            const id = e.target.dataset.id;
+            await this.model.deleteItem(id);
+        }
     }
 
     onKeyUp = (e) => {
         e.target.value = e.target.value.replace(/(^0+)/, "")
         e.target.value = e.target.value.replace(/[^0-9]/g, '');
-        e.target.value = this.numberWithCommas(e.target.value);
+        e.target.value = numberWithCommas(e.target.value);
     }
 
     changeCategory = (classfication) => {
@@ -227,19 +212,14 @@ class InputForm {
         const $deleteBtn = $('.deleteBtn');
         if ($deleteBtn) {
             payload.id = $deleteBtn.dataset.id;
-            console.log(payload);
             await editTransaction(payload);
         }else {
             await addTransaction(payload);
         }
-        await transactionModel.changeData();
+        await this.model.changeData();
     }
 
-    numberWithCommas = (number) => {
-        return number.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+    
     
 
 }
-
-export default new InputForm();

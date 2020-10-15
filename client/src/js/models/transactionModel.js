@@ -32,5 +32,10 @@ class TransactionModel extends Observable {
         return this.list.find(e => e.id == id);
     }
 
+    filterData = (checkedBox) => {
+        const fiterList = this.list.filter(item => checkedBox.includes(item.Category.Classification.name))
+        this.notify(fiterList);
+    }
+
 }
 export default new TransactionModel();

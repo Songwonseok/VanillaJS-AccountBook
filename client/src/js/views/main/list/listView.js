@@ -1,11 +1,16 @@
-import inputForm from '@views/main/list/inputForm'
-import {$} from '@utils/common'
-import transactionModel from '@models/transactionModel'
+import InputForm from '@views/main/list/inputForm'
+import FilterView from '@views/filter/filterView'
+
+import { $, numberWithCommas } from '@utils/common'
 
 const DAY = ['일', '월', '화', '수', '목', '금', '토'];
 
 class ListView{
-    constructor(){}
+    constructor(model){
+        this.model = model;
+        this.filter = new FilterView(model);
+        this.inputForm = new InputForm(model);
+    }
 
     groupByDate = (list) => {
         const dateObj = {};
@@ -25,7 +30,7 @@ class ListView{
                 if(item.Category.Classification.name==='수입'){
                     income += item.price;
                 }else{
-                    expenditure -= item.price;
+                    expenditure += item.price;
                 }
             })
             dateObj[key].income = income;
@@ -38,7 +43,8 @@ class ListView{
     onEvent = () => {
         const $list = $('.accountList');
         
-        inputForm.onEvent();
+        this.inputForm.onEvent();
+        this.filter.onEvent();
         $list.addEventListener('mouseover', this.onMouseOverItem)
         $list.addEventListener('mouseout', this.onMouseOutItem)
         $list.addEventListener('click', this.onClickEditBtn)
@@ -47,12 +53,13 @@ class ListView{
     onClickEditBtn = (e) => {
         if (e.target.className == 'itemEditBtn'){
             const id = e.target.closest('.accountItem').dataset.id;
-            const item = transactionModel.findOne(id);
+            const item = this.model.findOne(id);
             
-            $('form').outerHTML = inputForm.render(item);
+            $('form').outerHTML = this.inputForm.render(item);
             const $btn = $('.submitBtn');
             $btn.classList.remove('disabled');
-            inputForm.onEvent();
+            $btn.disabled = false;
+            this.inputForm.onEvent();
         }
     }
 
@@ -72,17 +79,20 @@ class ListView{
 
     render = (list) => {
 
-        let inner = inputForm.render();
+        let inner = this.inputForm.render();
 
         const dateList = this.groupByDate(list);
         const dates = Object.keys(dateList);
 
+        inner += this.filter.render();
         inner += `<div class="accountList">`
+        
+
         dates.forEach(date => {
             inner += `<div class="accountDate">
                         <span class="day">${Number(date.slice(5, 7))}월${String(Number(date.slice(8))).padStart(2,' ')}일 ${DAY[new Date(date).getDay()]}</span>
-                        <span class="dayIncome">+${dateList[date].income}원</span> 
-                        <span class="dayExpenditure">${dateList[date].expenditure}원</span>
+                        <span class="dayIncome">${(dateList[date].income > 0) ? ("+" + numberWithCommas(dateList[date].income.toString())+"원"):''}</span> 
+                        <span class="dayExpenditure">${(dateList[date].expenditure > 0) ? ("-" + numberWithCommas(dateList[date].expenditure.toString()) + "원") : ''}</span>
                      </div>`
             inner += dateList[date].reduce((acc, item) =>{
                 return acc += (item.Category.Classification.name === '지출')?
@@ -91,14 +101,14 @@ class ListView{
                             <span class="itemContent">${item.content}</span>
                             <span class="itemEditBtn"><i class="fas fa-edit"></i> 수정</span>
                             <span class="itemPayment">${item.Payment.name}</span> 
-                            <span class="itemPrice">-${item.price}원</span>
+                            <span class="itemPrice">-${numberWithCommas(item.price.toString())}원</span>
                         </div>`
                     : `<div class="accountItem" data-id="${item.id}">
                                 <span class="itemCategory incomeItem">${item.Category.name}</span> 
                                 <span class="itemContent">${item.content}</span>
                                 <span class="itemEditBtn"><i class="fas fa-edit"></i> 수정</span>
                                 <span class="itemPayment">${item.Payment.name}</span> 
-                                <span class="itemPrice incomeItem">+${item.price}원</span>
+                                <span class="itemPrice incomeItem">+${numberWithCommas(item.price.toString())}원</span>
                             </div>`
             }, '');
         })
