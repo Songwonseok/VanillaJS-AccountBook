@@ -53,7 +53,7 @@ const generateToken = (user) => {
     },
     jwtConfig.secret,
     {
-        expiresIn: '12h'
+        expiresIn: '1h'
     })
 }
 module.exports = new UserController();

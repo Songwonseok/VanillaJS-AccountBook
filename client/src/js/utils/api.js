@@ -1,6 +1,5 @@
+import authModel from '@models/authModel'
 
-
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcmlkIjoiYXNkZiIsIm5hbWUiOiJ0ZXN0ZXIiLCJpYXQiOjE2MDI3ODMxNzYsImV4cCI6MTYwMjgyNjM3Nn0.2vxwtRf_Q0fiNayBsgnSyzQrx1LSsWI7t68rzkmkSOs"
 const url = "http://localhost:3000"
 
 export const getTransactionList = (month) => {
@@ -9,9 +8,13 @@ export const getTransactionList = (month) => {
         mode: 'cors',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization' : `Bearer ${token}`
+            'Authorization': `Bearer ${localStorage.token}`
         }
     }).then((res) => res.json())
+    .catch(e => {
+        if (e.message === 'Unexpected token U in JSON at position 0')
+            authModel.deleteToken();
+    })
 }
 
 export const addTransaction = ((payload) => {
@@ -20,10 +23,14 @@ export const addTransaction = ((payload) => {
         mode: 'cors',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${localStorage.token}`
         },
         body: JSON.stringify(payload)
     }).then((res) => res.json())
+    .catch(e => {
+        if (e.message === 'Unexpected token U in JSON at position 0')
+            authModel.deleteToken();
+    })
 })
 
 export const editTransaction = ( (payload) => {
@@ -32,10 +39,14 @@ export const editTransaction = ( (payload) => {
         mode: 'cors',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${localStorage.token}`
         },
         body: JSON.stringify(payload)
     }).then((res) => res.json())
+    .catch(e => {
+        if (e.message === 'Unexpected token U in JSON at position 0')
+            authModel.deleteToken();
+    })
 })
 
 
@@ -45,28 +56,42 @@ export const deleteTransaction = ((id) => {
         mode: 'cors',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${localStorage.token}`
         }
     }).then((res) => res.json())
+    .catch(e => {
+        if (e.message === 'Unexpected token U in JSON at position 0')
+            authModel.deleteToken();
+    })
 })
 
-export const putFetch = ((url, body) => {
-    return fetch(url, {
-        method: 'PUT',
+export const login = (payload) => {
+    return fetch(`${url}/api/user/login`, {
+        method: 'POST',
         mode: 'cors',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(body)
+        body: JSON.stringify(payload)
     }).then((res) => res.json())
-})
+        .catch(e => {
+            console.error(e);
+            throw new Error(e.message);
+        })
+}
 
-export const deleteFetch = ((url) => {
-    return fetch(url, {
-        method: 'DELETE',
+export const signup = (payload) => {
+    return fetch(`${url}/api/user/signup`, {
+        method: 'POST',
         mode: 'cors',
         headers: {
             'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify(payload)
     }).then((res) => res.json())
-})
+        .catch(e => {
+            console.error(e);
+            throw new Error(e.message);
+        })
+}
+

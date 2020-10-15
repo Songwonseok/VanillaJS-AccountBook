@@ -9,7 +9,12 @@ class TransactionModel extends Observable {
     }
 
     getData = async (month) => {
-        this.list = await getTransactionList(month);
+        try{
+            this.list = await getTransactionList(month);
+        }catch(e){
+            console.log(e.message);
+            console.log('토큰 에바야');
+        }
     }
 
     changeData = async (month=this.month) => {
