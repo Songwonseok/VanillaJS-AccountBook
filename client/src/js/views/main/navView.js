@@ -116,7 +116,7 @@ export default class NavView {
                 break;
             case '/statistic':
                 $root.innerHTML = this.statisticView.render(data);
-                this.statisticView.drawChart();
+                this.statisticView.onDraw();
                 break;
         }
     }
