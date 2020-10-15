@@ -1,5 +1,5 @@
-import { $ } from '../../utils/common'
-import ListView from './list/listView'
+import { $ } from '@utils/common'
+import ListView from '@views/main/list/listView'
 
 export default class NavView {
     constructor(model) {
@@ -59,9 +59,9 @@ export default class NavView {
     render = ($div) => {
         $div.innerHTML += `<nav>
                     <div id="month">
-                    <button class="monthBtn" id="monthDown"><i class="fas fa-angle-left"></i></button>
+                    <button class="monthBtn" id="monthDown"><i class="fas fa-angle-left fa-2x"></i></button>
                     <span class="currentMonth no-select">${this.currentMonth}월</span>
-                    <button class="monthBtn" id="monthUp"><i class="fas fa-angle-right"></i></button>
+                    <button class="monthBtn" id="monthUp"><i class="fas fa-angle-right fa-2x"></i></button>
                     </div>
 
                     <ul>
