@@ -10,6 +10,14 @@ module.exports = {
         path: path.resolve(__dirname, 'server/public/dist'),
         filename: '[name].bundle.js',
     },
+    resolve: {
+        alias: {
+            '@models': path.resolve(__dirname, 'client/src/js/models'),
+            '@views': path.resolve(__dirname, 'client/src/js/views'),
+            '@utils': path.resolve(__dirname, 'client/src/js/utils'),
+            '@interface': path.resolve(__dirname, 'client/src/js/interface'),
+        }
+    },
     module: {
         rules: [
             {

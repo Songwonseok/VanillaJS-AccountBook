@@ -1,9 +1,8 @@
-import transactionModel from './models/transactionModel'
-
-import NavView  from './views/main/navView'
-import HeaderView from './views/header/headerView'
-
-import {$} from './utils/common'
+import transactionModel from '@models/transactionModel'
+import NavView  from '@views/main/navView'
+import HeaderView from '@views/header/headerView'
+import '@fortawesome/fontawesome-free/js/all'
+import {$} from '@utils/common'
 
 
 
