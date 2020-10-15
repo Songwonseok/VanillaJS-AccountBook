@@ -1,0 +1,30 @@
+@import '../common/variable';
+
+.incomeContainer{
+    color: $blueColor;
+}
+
+.expenditureContainer {
+    color: $mintColor;
+}
+
+#filter{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+    border-bottom: solid 2px;
+    border-color: gray;
+}
+
+#filter div {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;;
+}
+
+.totalPrice {
+    font-weight: bold;
+    line-height: 100%;
+    flex:none;
+}

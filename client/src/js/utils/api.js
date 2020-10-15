@@ -27,7 +27,6 @@ export const addTransaction = ((payload) => {
 })
 
 export const editTransaction = ( (payload) => {
-    console.log(payload);
     return fetch(`${url}/api/transaction`, {
         method: 'PUT',
         mode: 'cors',

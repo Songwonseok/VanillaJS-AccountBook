@@ -1,4 +1,5 @@
-@import 'common/reset', 'common/variable','components/header', 'components/nav', 'components/form', 'components/filter';
+@import 'common/reset', 'common/variable';
+@import 'components/header', 'components/nav', 'components/form', 'components/filter', 'components/statistic';
 
 .no-select {
     -webkit-touch-callout: none;

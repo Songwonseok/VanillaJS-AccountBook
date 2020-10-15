@@ -1,11 +1,14 @@
 import { $ } from '@utils/common'
 import ListView from '@views/main/list/listView'
+import StatisticView from '@views/main/statistic/statisticView'
+import filterView from '@views/filter/filterView'
 
 export default class NavView {
     constructor(model) {
         this.currentMonth = new Date().getMonth() + 1;
         this.model = model;
         this.listView = new ListView(model);
+        this.statisticView = new StatisticView(model);
         this.model.subscribe(this);
     }
 
@@ -46,7 +49,7 @@ export default class NavView {
 
     popStateHandler = () => {
         const path = location.pathname;
-        this.listView.filter.init();
+        filterView.reset();
         this.viewMap(path);
         this.setInsetStyle(path);
     }
@@ -85,18 +88,20 @@ export default class NavView {
         const $upBtn = $('#monthUp');
         const $downBtn = $('#monthDown');
         const $div = $('.currentMonth');
-
+        
         $upBtn.addEventListener('click', async (e) => {
             this.currentMonth = (this.currentMonth + 1 === 13) ? 1 : this.currentMonth + 1; 
             $div.innerHTML = `${this.currentMonth}월`
+            filterView.reset();
             await this.model.changeData(this.currentMonth);
         })
         $downBtn.addEventListener('click', async (e) => {
             this.currentMonth = (this.currentMonth - 1 === 0) ? 12 : this.currentMonth - 1;
             $div.innerHTML = `${this.currentMonth}월`
+            filterView.reset();
             await this.model.changeData(this.currentMonth)
         })
-
+        
     }
 
     viewMap = (path, data=this.model.list) => {
@@ -110,7 +115,8 @@ export default class NavView {
                 $root.innerHTML = `<h2>달력</h2>`
                 break;
             case '/statistic':
-                $root.innerHTML = `<h2>통계</h2>`
+                $root.innerHTML = this.statisticView.render(data);
+                this.statisticView.drawChart();
                 break;
         }
     }

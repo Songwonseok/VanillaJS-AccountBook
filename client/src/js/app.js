@@ -3,7 +3,7 @@ import NavView  from '@views/main/navView'
 import HeaderView from '@views/header/headerView'
 import '@fortawesome/fontawesome-free/js/all'
 import {$} from '@utils/common'
-
+import filterView from '@views/filter/filterView'
 
 
 
@@ -16,6 +16,7 @@ class App {
 
     init = async() => {
         await transactionModel.getData((new Date().getMonth() + 1))
+        filterView.setModel(transactionModel);
         const navView = new NavView(transactionModel);
         HeaderView.render(this.$appNode);
         navView.render(this.$appNode)

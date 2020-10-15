@@ -1,5 +1,5 @@
 import InputForm from '@views/main/list/inputForm'
-import FilterView from '@views/filter/filterView'
+import filterView from '@views/filter/filterView'
 
 import { $, numberWithCommas } from '@utils/common'
 
@@ -8,7 +8,6 @@ const DAY = ['일', '월', '화', '수', '목', '금', '토'];
 class ListView{
     constructor(model){
         this.model = model;
-        this.filter = new FilterView(model);
         this.inputForm = new InputForm(model);
     }
 
@@ -44,7 +43,7 @@ class ListView{
         const $list = $('.accountList');
         
         this.inputForm.onEvent();
-        this.filter.onEvent();
+        filterView.onEvent();
         $list.addEventListener('mouseover', this.onMouseOverItem)
         $list.addEventListener('mouseout', this.onMouseOutItem)
         $list.addEventListener('click', this.onClickEditBtn)
@@ -84,7 +83,7 @@ class ListView{
         const dateList = this.groupByDate(list);
         const dates = Object.keys(dateList);
 
-        inner += this.filter.render();
+        inner += filterView.render();
         inner += `<div class="accountList">`
         
 

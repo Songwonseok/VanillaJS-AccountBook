@@ -1,13 +1,17 @@
 import { $,$All, numberWithCommas } from '@utils/common'
 
-export default class FilterView {
-    constructor(model) {
-        this.model = model;
+class FilterView {
+    constructor() {
+        this.model;
         this.checked = ["수입", "지출"];
     }
 
-    init() {
+    reset() {
         this.checked = ["수입", "지출"];
+    }
+
+    setModel(model) {
+        this.model = model;
     }
 
     onEvent() {
@@ -18,7 +22,6 @@ export default class FilterView {
                 if (box.checked == true) changedChecked.push(box.value);
             });
             this.checked = [...changedChecked];
-            console.log(this.checked);
             this.model.filterData(this.checked);
         })
     }
@@ -51,4 +54,5 @@ export default class FilterView {
     }
 }
 
+export default new FilterView();
 

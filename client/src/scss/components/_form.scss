@@ -16,6 +16,12 @@ input[type="radio"] + span{
     cursor:pointer;
 }
 
+.income input[type="radio"]:checked + span{
+    border:1px solid $blueColor;
+    background: $blueColor;
+    color:#fff;
+}
+
 input[type="radio"]:checked + span{
     border:1px solid $mintColor;
     background: $mintColor;
@@ -97,12 +103,6 @@ form div {
 }
 
 
-form {
-    border-bottom: solid 2px;
-    border-color: darkgrey;
-    padding-bottom: 20px;
-}
-
 .inputClassification{
     display: flex;
     justify-content: space-between;
@@ -112,9 +112,9 @@ form {
     background-color: white;
     color: $mintColor;
     border: none;
-    font-weight: bold;
     cursor: pointer;
-    outline:none;
+    font-size: small;
+    font-weight: bold;
     margin-right: 10px;
 }
 
@@ -122,8 +122,8 @@ form {
    background-color: white;
     color: $redColor;
     border: none;
-    font-weight: bold;
     cursor: pointer;
-    outline:none;
+    font-size: small;
+    font-weight: bold;
     margin-right: 10px; 
 }

@@ -1,0 +1,26 @@
+@import '../common/variable';
+.pieChart {
+    justify-content: center;
+    margin: auto;
+}
+
+.chartTotal{
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.chartCheckbox{
+    margin:auto
+}
+.totalText{
+    margin-left: auto;
+}
+
+.totalPrice{
+    width: 120px;
+    color:$mintColor;
+    text-align: right;
+    margin-right: auto;
+}
