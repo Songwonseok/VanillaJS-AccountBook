@@ -95,3 +95,18 @@ export const signup = (payload) => {
         })
 }
 
+export const getPayment = () => {
+    return fetch(`${url}/api/payment/`, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.token}`
+        }
+    }).then((res) => res.json())
+        .catch(e => {
+            if (e.message === 'Unexpected token U in JSON at position 0')
+                authModel.deleteToken();
+        })
+}
+

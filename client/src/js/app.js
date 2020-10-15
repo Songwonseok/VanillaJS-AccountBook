@@ -28,6 +28,7 @@ class App {
             const navView = new NavView(transactionModel);
             HeaderView.render(this.$appNode);
             navView.render(this.$appNode)
+            HeaderView.onEvent();
         }else{
             loginView.render();
         }

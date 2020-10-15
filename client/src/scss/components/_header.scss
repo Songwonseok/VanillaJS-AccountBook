@@ -8,4 +8,38 @@ header {
     font-size: x-large;
     font-weight: bold;
     color:white;
+    display:flex;
+    
+}
+
+.appTitle {
+    position: absolute;
+    top:0px;
+    left: 48%;
+    z-index: 0;
+}
+
+.modalBtn{
+    margin-left: auto;
+    background-color: $mintColor;
+    border: none;
+    outline: none;
+    color:white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: medium;
+}
+
+.logoutBtn {
+    height:30px;
+    background-color: $mintColor;
+    border: none;
+    outline: none;
+    color:white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: medium;
+    margin: 10px 10px 0 15px;
+    
+
 }

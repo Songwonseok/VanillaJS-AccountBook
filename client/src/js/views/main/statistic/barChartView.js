@@ -6,7 +6,6 @@ export default class BarChartView {
     render = (data) => {
         let inner = `<div class="barChartContainer">`
         for(let i=0; i<data.list.length;i++){
-            console.log(data.list[i]);
             inner += `<div class="barChartItem">
                         <div class="categoryName">${data.list[i].name}</div>
                         <div class="categoryRate">${Math.round(data.list[i].price / data.total * 100)}%</div>
