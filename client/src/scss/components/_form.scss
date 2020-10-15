@@ -96,8 +96,34 @@ form div {
     margin-bottom: 15px;
 }
 
+
 form {
     border-bottom: solid 2px;
     border-color: darkgrey;
     padding-bottom: 20px;
+}
+
+.inputClassification{
+    display: flex;
+    justify-content: space-between;
+}
+
+.resetBtn {
+    background-color: white;
+    color: $mintColor;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    outline:none;
+    margin-right: 10px;
+}
+
+.deleteBtn{
+   background-color: white;
+    color: $redColor;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    outline:none;
+    margin-right: 10px; 
 }

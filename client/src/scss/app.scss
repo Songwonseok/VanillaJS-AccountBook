@@ -18,14 +18,12 @@
 }
 
 
-
-
 .accountList {
     margin:0 0 20px 0;
 }
 .accountDate {
     display: flex;
-    margin: 10px 0 0 0;
+    margin: 15px 0 0 0;
     height: 30px;
     line-height: 30px;
     border-bottom: solid 1px;
@@ -56,6 +54,10 @@
     border-color: darkgray;
 }
 
+.accountItem:hover {
+    background-color: $backmint;
+}
+
 .itemCategory.incomeItem{
     background-color:$blueColor;
     
@@ -74,10 +76,18 @@
 
 .itemContent {
     font-size: medium;
+    flex:none;
+}
+
+.itemEditBtn {
+    margin-left: auto;
+    margin-right: 5%;
+    visibility: hidden;
+    cursor: pointer;
+    color:$mintColor;
 }
 
 .itemPayment {
-    margin-left: auto;
     width: 120px;
     text-align: right;
     color: grey;

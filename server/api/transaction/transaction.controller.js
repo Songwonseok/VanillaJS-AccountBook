@@ -33,8 +33,11 @@ class TransactionController {
         }
         this.editTransaction = async (req, res, next) => {
             try {
-                if(req.user.id != req.body.user_id)
+                const transaction = await this.tService.get(req.body.id);
+                if (req.user.id != transaction.user_id){
                     res.status(401).send({message: '수정 권한이 없습니다.'})
+                    return;
+                }
 
                 const transactionDTO = {
                     id: req.body.id,

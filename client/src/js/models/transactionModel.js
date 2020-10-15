@@ -1,5 +1,5 @@
 import Observable from '@interface/observable'
-import { getTransactionList } from '@utils/api'
+import { getTransactionList, deleteTransaction } from '@utils/api'
 
 class TransactionModel extends Observable {
     constructor(){
@@ -16,6 +16,20 @@ class TransactionModel extends Observable {
         this.month = month;
         this.list = await getTransactionList(month);
         this.notify(this.list)
+    }
+
+    deleteItem = async (id) => {
+        await deleteTransaction(id);
+        const item = this.list.find(e => e.id == id);
+        const index = this.list.indexOf(item);
+        const newlist = [...this.list];
+        newlist.splice(index,1);
+        this.list = newlist; 
+        this.notify(this.list);
+    }
+
+    findOne = (id) => {
+        return this.list.find(e => e.id == id);
     }
 
 }

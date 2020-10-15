@@ -1,4 +1,6 @@
 import inputForm from '@views/main/list/inputForm'
+import {$} from '@utils/common'
+import transactionModel from '@models/transactionModel'
 
 const DAY = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -34,7 +36,38 @@ class ListView{
     }
 
     onEvent = () => {
+        const $list = $('.accountList');
+        
         inputForm.onEvent();
+        $list.addEventListener('mouseover', this.onMouseOverItem)
+        $list.addEventListener('mouseout', this.onMouseOutItem)
+        $list.addEventListener('click', this.onClickEditBtn)
+    }
+
+    onClickEditBtn = (e) => {
+        if (e.target.className == 'itemEditBtn'){
+            const id = e.target.closest('.accountItem').dataset.id;
+            const item = transactionModel.findOne(id);
+            
+            $('form').outerHTML = inputForm.render(item);
+            const $btn = $('.submitBtn');
+            $btn.classList.remove('disabled');
+            inputForm.onEvent();
+        }
+    }
+
+    onMouseOverItem = (e) => {
+        const $item = e.target.closest('.accountItem');
+        if ($item) {
+            $('.itemEditBtn', $item).style.visibility = 'visible';
+        }
+    }
+
+    onMouseOutItem = (e) => {
+        const $item = e.target.closest('.accountItem');
+        if ($item) {
+            $('.itemEditBtn', $item).style.visibility = 'hidden';
+        }
     }
 
     render = (list) => {
@@ -53,15 +86,17 @@ class ListView{
                      </div>`
             inner += dateList[date].reduce((acc, item) =>{
                 return acc += (item.Category.Classification.name === '지출')?
-                        `<div class="accountItem">
+                        `<div class="accountItem" data-id="${item.id}">
                             <span class="itemCategory">${item.Category.name}</span> 
                             <span class="itemContent">${item.content}</span>
+                            <span class="itemEditBtn"><i class="fas fa-edit"></i> 수정</span>
                             <span class="itemPayment">${item.Payment.name}</span> 
                             <span class="itemPrice">-${item.price}원</span>
                         </div>`
-                    : `<div class="accountItem">
+                    : `<div class="accountItem" data-id="${item.id}">
                                 <span class="itemCategory incomeItem">${item.Category.name}</span> 
                                 <span class="itemContent">${item.content}</span>
+                                <span class="itemEditBtn"><i class="fas fa-edit"></i> 수정</span>
                                 <span class="itemPayment">${item.Payment.name}</span> 
                                 <span class="itemPrice incomeItem">+${item.price}원</span>
                             </div>`

@@ -1,6 +1,6 @@
 
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcmlkIjoiYXNkZiIsIm5hbWUiOiJ0ZXN0ZXIiLCJpYXQiOjE2MDI3MjM1NDQsImV4cCI6MTYwMjc2Njc0NH0.NIEIQJkfESaYhslEFHxt0cFPcHCKTP0gmdiLWwRORJM"
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcmlkIjoiYXNkZiIsIm5hbWUiOiJ0ZXN0ZXIiLCJpYXQiOjE2MDI3Mzk4NDgsImV4cCI6MTYwMjc4MzA0OH0.lW70-NS14TS49xaOWHm-HnLW_hiT-zFO6zPdKYQfbeY"
 const url = "http://localhost:3000"
 
 export const getTransactionList = (month) => {
@@ -23,6 +23,31 @@ export const addTransaction = ((payload) => {
             'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(payload)
+    }).then((res) => res.json())
+})
+
+export const editTransaction = ( (payload) => {
+    console.log(payload);
+    return fetch(`${url}/api/transaction`, {
+        method: 'PUT',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(payload)
+    }).then((res) => res.json())
+})
+
+
+export const deleteTransaction = ((id) => {
+    return fetch(`${url}/api/transaction/${id}`, {
+        method: 'DELETE',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
     }).then((res) => res.json())
 })
 
