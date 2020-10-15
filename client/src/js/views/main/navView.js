@@ -1,6 +1,7 @@
 import { $ } from '@utils/common'
 import ListView from '@views/main/list/listView'
 import StatisticView from '@views/main/statistic/statisticView'
+import CalenderView from '@views/main/calender/calenderView'
 import filterView from '@views/filter/filterView'
 
 export default class NavView {
@@ -9,6 +10,7 @@ export default class NavView {
         this.model = model;
         this.listView = new ListView(model);
         this.statisticView = new StatisticView(model);
+        this.calenderView = new CalenderView(model);
         this.model.subscribe(this);
     }
 
@@ -112,7 +114,8 @@ export default class NavView {
                 this.listView.onEvent();
                 break;
             case '/calendar':
-                $root.innerHTML = `<h2>달력</h2>`
+                $root.innerHTML = this.calenderView.render(data, this.currentMonth);
+                this.calenderView.onEvent();
                 break;
             case '/statistic':
                 $root.innerHTML = this.statisticView.render(data);

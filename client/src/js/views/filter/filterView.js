@@ -32,11 +32,11 @@ class FilterView {
             <form id="filter">
                 <div class="incomeContainer">
                     <label><input type="checkbox" name="income" value="수입" ${this.checked.find(e => e == "수입")?"checked":''}></input> 수입</label>
-                    <span class="totalPrice">+${numberWithCommas(totalPrice.income.toString())}원</span>
+                    <span class="filterTotalPrice">+${numberWithCommas(totalPrice.income.toString())}원</span>
                 </div>
                 <div class="expenditureContainer">
                     <label><input type="checkbox" name="expenditure" value="지출" ${this.checked.find(e => e == "지출") ? "checked" : ''}></input> 지출</label>
-                    <span class="totalPrice">-${numberWithCommas(totalPrice.expenditure.toString())}원</span>
+                    <span class="filterTotalPrice">-${numberWithCommas(totalPrice.expenditure.toString())}원</span>
                 </div>
             </form>
         `

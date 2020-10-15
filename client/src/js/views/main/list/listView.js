@@ -1,7 +1,7 @@
 import InputForm from '@views/main/list/inputForm'
 import filterView from '@views/filter/filterView'
 
-import { $, numberWithCommas } from '@utils/common'
+import { $, numberWithCommas, groupByDate } from '@utils/common'
 
 const DAY = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -9,34 +9,6 @@ class ListView{
     constructor(model){
         this.model = model;
         this.inputForm = new InputForm(model);
-    }
-
-    groupByDate = (list) => {
-        const dateObj = {};
-
-        list.forEach(item => {
-            const date = item.createDate.slice(0,10);
-            if(!dateObj[date]){
-                dateObj[date] = [item];
-                return;
-            }
-            dateObj[date].push(item);
-        });
-        Object.keys(dateObj).forEach(key => {
-            let income = 0;
-            let expenditure =0;
-            dateObj[key].forEach(item => {
-                if(item.Category.Classification.name==='수입'){
-                    income += item.price;
-                }else{
-                    expenditure += item.price;
-                }
-            })
-            dateObj[key].income = income;
-            dateObj[key].expenditure = expenditure;
-        })
-
-        return dateObj;
     }
 
     onEvent = () => {
@@ -80,7 +52,7 @@ class ListView{
 
         let inner = this.inputForm.render();
 
-        const dateList = this.groupByDate(list);
+        const dateList = groupByDate(list);
         const dates = Object.keys(dateList);
 
         inner += filterView.render();

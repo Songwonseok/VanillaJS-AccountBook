@@ -32,6 +32,7 @@
     border-top: solid 2px;
     border-color: darkgrey;
     margin-top: 30px;
+    margin-bottom: 30px;
 }
 .barChartItem{
     display: flex;
@@ -39,6 +40,8 @@
     border-color: darkgrey;
     height: 50px;
     line-height: 50px;
+    font-weight: bold;
+
 }
 
 .categoryName{
