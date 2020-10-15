@@ -24,3 +24,41 @@
     text-align: right;
     margin-right: auto;
 }
+
+
+.barChartContainer {
+    display: flex;
+    flex-direction: column;
+    border-top: solid 2px;
+    border-color: darkgrey;
+    margin-top: 30px;
+}
+.barChartItem{
+    display: flex;
+    border-bottom: solid 2px;
+    border-color: darkgrey;
+    height: 50px;
+    line-height: 50px;
+}
+
+.categoryName{
+    width: 80px;
+    text-align: center;
+}
+
+.categoryRate{
+    width: 50px;
+    text-align: center;
+    color: $mintColor;
+}
+
+.rateBarChart{
+    flex: auto;
+    text-align: left;
+    padding: auto;
+}
+
+.categoryTotal{
+    width: 120px;
+    text-align: right;
+}

@@ -1,10 +1,12 @@
 import { numberWithCommas } from '@utils/common'
 import PieChartView from '@views/main/statistic/pieChartView'
+import BarChartView from '@views/main/statistic/barChartView'
 
 export default class StatisticView {
     constructor(model) {
         this.model = model;
         this.pieChartView = new PieChartView();
+        this.barChartView = new BarChartView();
         this.data;
     }
 
@@ -20,6 +22,7 @@ export default class StatisticView {
                         <span class="totalPrice">${numberWithCommas(this.data.total.toString())}원</span>
                     </div>`
         inner += this.pieChartView.render(this.data);
+        inner += this.barChartView.render(this.data);
         return inner;
     }
 
