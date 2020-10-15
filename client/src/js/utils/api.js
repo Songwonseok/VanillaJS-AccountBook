@@ -1,6 +1,6 @@
 
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcmlkIjoiYXNkZiIsIm5hbWUiOiJ0ZXN0ZXIiLCJpYXQiOjE2MDI2NzM1MzAsImV4cCI6MTYwMjcxNjczMH0.Y8rx_QvAn7U986QzM7j5rd4hoQAljZoXDfkNdP_IbZY"
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcmlkIjoiYXNkZiIsIm5hbWUiOiJ0ZXN0ZXIiLCJpYXQiOjE2MDI3MjM1NDQsImV4cCI6MTYwMjc2Njc0NH0.NIEIQJkfESaYhslEFHxt0cFPcHCKTP0gmdiLWwRORJM"
 const url = "http://localhost:3000"
 
 export const getTransactionList = (month) => {
@@ -14,14 +14,15 @@ export const getTransactionList = (month) => {
     }).then((res) => res.json())
 }
 
-export const postFetch = ((url, body) => {
-    return fetch(url, {
+export const addTransaction = ((payload) => {
+    return fetch(`${url}/api/transaction`, {
         method: 'POST',
         mode: 'cors',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(body)
+        body: JSON.stringify(payload)
     }).then((res) => res.json())
 })
 
