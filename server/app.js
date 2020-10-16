@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(cors({ origin: 'http://115.85.182.190 }' }))
+app.use(cors({ origin: 'http://115.85.182.190 ' }))
 app.use(router);
 
 // catch 404 and forward to error handler
