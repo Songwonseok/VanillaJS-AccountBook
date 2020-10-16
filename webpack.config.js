@@ -15,7 +15,8 @@ module.exports = {
             '@models': path.resolve(__dirname, 'client/src/js/models'),
             '@views': path.resolve(__dirname, 'client/src/js/views'),
             '@utils': path.resolve(__dirname, 'client/src/js/utils'),
-            '@interface': path.resolve(__dirname, 'client/src/js/interface')
+            '@interface': path.resolve(__dirname, 'client/src/js/interface'),
+            '@cache': path.resolve(__dirname, 'client/src/js/cache'),
         }
     },
     module: {

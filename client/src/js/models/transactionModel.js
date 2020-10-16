@@ -1,5 +1,7 @@
 import Observable from '@interface/observable'
+import cache from '@cache/cache'
 import { getTransactionList, deleteTransaction } from '@utils/api'
+
 
 class TransactionModel extends Observable {
     constructor(){
@@ -11,15 +13,22 @@ class TransactionModel extends Observable {
     getData = async (month) => {
         try{
             this.list = await getTransactionList(month);
+            cache.set(month, [...this.list]);
         }catch(e){
             console.log(e.message);
-            console.log('토큰 에바야');
         }
     }
 
     changeData = async (month=this.month) => {
+        if (month != this.month && cache.has(month)){
+            this.list = [...cache.get(month)];
+            this.notify(this.list);
+            return;
+        }
+
         this.month = month;
         this.list = await getTransactionList(month);
+        cache.set(month, [...this.list]);
         this.notify(this.list)
     }
 
@@ -29,7 +38,9 @@ class TransactionModel extends Observable {
         const index = this.list.indexOf(item);
         const newlist = [...this.list];
         newlist.splice(index,1);
-        this.list = newlist; 
+        this.list = newlist;
+
+        cache.delete(this.month);
         this.notify(this.list);
     }
 

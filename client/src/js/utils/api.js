@@ -1,6 +1,6 @@
 import authModel from '@models/authModel'
 
-const url = "http://115.85.182.190"
+const url = "http://localhost:3000"
 
 export const getTransactionList = (month) => {
     return fetch(`${url}/api/transaction/${month}`, {
