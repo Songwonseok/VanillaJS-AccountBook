@@ -26,6 +26,7 @@ class TransactionModel extends Observable {
             return;
         }
 
+        
         this.month = month;
         this.list = await getTransactionList(month);
         cache.set(month, [...this.list]);
