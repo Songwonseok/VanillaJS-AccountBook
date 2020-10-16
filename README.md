@@ -111,7 +111,7 @@
 - [x] 상태(state)관리
   - [x] 데이터 변경을 위한 함수는 순수함수여야 한다.
   - [x] immutable 방식으로 데이터 변경을 시도한다.
-- [ ] 데이터 시각화는 SVG나 Canvas기술을 활용해서 제작한다. 라이브러리를 사용하지 않는다.(*)
+- [x] 데이터 시각화는 SVG나 Canvas기술을 활용해서 제작한다. 라이브러리를 사용하지 않는다.(*)
 - [x] 코드 구현에 도움이 되는 외부 라이브러를 사용할 수 없다.
 - [ ] 테스트 코드 구현한다. (*)
   - [ ] 모델을 다루는 부분 위주로 테스트 코드를 구현한다.
@@ -119,3 +119,28 @@
 ## ERD
 
 ![J20_ERD](https://user-images.githubusercontent.com/7006837/95067248-8115fa00-073e-11eb-89cd-f6219e0e27bc.png)
+
+## 데모
+
+URL : http://115.85.182.190/
+
+> ID : boost
+> PW : camp
+
+
+
+## 실행화면
+
+### 1) 내역화면
+
+![list](https://user-images.githubusercontent.com/7006837/96206588-3c8f2780-0fa4-11eb-908f-643d75f28e81.PNG)
+
+
+
+### 2) 달력화면
+
+![calender](https://user-images.githubusercontent.com/7006837/96206598-4022ae80-0fa4-11eb-9116-23c1297e99c7.PNG)
+
+### 3) 통계화면
+
+![통계](https://user-images.githubusercontent.com/7006837/96206602-42850880-0fa4-11eb-9397-d10ed362784b.PNG)
