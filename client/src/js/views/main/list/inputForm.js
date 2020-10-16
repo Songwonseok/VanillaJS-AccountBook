@@ -45,7 +45,12 @@ export default class InputForm {
                         <label>결제수단</label>
                         <select name="payment">
                         <option value="" selected disabled hidden>선택</option>
-                        <option value="3">카카오카드</option>
+                        <option value="7">현금</option>
+                        <option value="3">체크카드</option>
+                        <option value="8">신용카드</option>
+                        <option value="1">국민카드</option>
+                        <option value="2">신한카드</option>
+                        <option value="9">T머니</option>
                         </select>
                     </span>
                     </div>
@@ -101,7 +106,12 @@ export default class InputForm {
                         <label>결제수단</label>
                         <select name="payment">
                         <option value=""  disabled hidden>선택</option>
-                        <option value="${item.payment_id}" selected>${item.Payment.name}</option>
+                        <option value="7" ${(item.payment_id == 7) ? "selected='true'" : ""}>현금</option>
+                        <option value="3" ${(item.payment_id == 3) ?"selected='true'":""}>체크카드</option>
+                        <option value="8" ${(item.payment_id == 8) ? "selected='true'" : ""}>신용카드</option>
+                        <option value="1" ${(item.payment_id == 1) ? "selected='true'" : ""}>국민카드</option>
+                        <option value="2" ${(item.payment_id == 2) ? "selected='true'" : ""}>신한카드</option>
+                        <option value="9" ${(item.payment_id == 9) ? "selected='true'" : ""}>T머니</option>
                         </select>
                     </span>
                     </div>
