@@ -17,7 +17,6 @@ class HeaderView {
     }
 
     onLogout = (e) => {
-        console.log('누름');
         authModel.deleteToken();
     }
 

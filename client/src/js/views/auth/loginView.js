@@ -24,7 +24,6 @@ class LoginView {
         try {
             const res = await login(payload);
             authModel.setToken(res.token);
-            console.log(res);
         } catch {
             this.render();
         }
