@@ -12,17 +12,17 @@ class HeaderView {
     }
     onEvent = () => {
         $('.logoutBtn').addEventListener('click', this.onLogout)
-        // $('.modalBtn').addEventListener('click', this.onModal)
-        // $('.modal_overlay').addEventListener('click', this.onModal)
+        $('.modalBtn').addEventListener('click', this.onModal)
     }
 
     onLogout = (e) => {
         authModel.deleteToken();
     }
 
-    // onModal = (e) => {
-    //     e.target.closest('.paymentModal').classList.toggle('hidden');
-    // }
+    onModal = (e) => {
+        const $modal = $('.paymentModal');
+        $modal.classList.toggle('hidden');
+    }
 }
 
 export default new HeaderView();

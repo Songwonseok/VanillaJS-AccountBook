@@ -12,7 +12,7 @@ export default class InputForm {
             return this.editForm(item)
 
         const date = new Date();
-        return `<form>
+        return `<form class="transactionForm">
                     <div class="inputClassification">
                         <span>
                             <label>분류</label>
@@ -69,7 +69,7 @@ export default class InputForm {
     }
 
     editForm = (item) => {
-        let render = `<form>
+        let render = `<form class="transactionForm">
                     <div class="inputClassification">
                         <span>
                             <label>분류</label>
@@ -131,7 +131,7 @@ export default class InputForm {
     }
     onEvent = () => {
         const $submitBtn = $('.submitBtn');
-        const $form = $('form');
+        const $form = $('.transactionForm');
         const $inputPirce = $('.inputPrice');
         const $resetBtn = $('.resetBtn');
         const $deleteBtn = $('.deleteBtn');
@@ -145,7 +145,7 @@ export default class InputForm {
     onReset = (e) => {
         e.preventDefault();
         const date = new Date();
-        const $form = $('form');
+        const $form = $('.transactionForm');
         $form.content.value = "",
         $form.price.value = "",
         $form.createDate.value = `${date.getFullYear() }-${date.getMonth() + 1 }-${ date.getDate()}`,
@@ -190,7 +190,7 @@ export default class InputForm {
 
     onChange = (e) => {
         const $btn = $('.submitBtn');
-        const $form = e.target.closest('form')
+        const $form = e.target.closest('.transactionForm')
 
         if (e.target.getAttribute('type') == 'radio'){
             this.changeCategory(e.target.value);
@@ -210,7 +210,7 @@ export default class InputForm {
         e.preventDefault();
 
         
-        const $form = e.target.closest('form');
+        const $form = e.target.closest('.transactionForm');
 
         const payload = {
             content: $form.content.value,

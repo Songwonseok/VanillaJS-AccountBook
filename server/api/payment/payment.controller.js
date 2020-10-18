@@ -21,8 +21,8 @@ class PaymentController {
                     user_id: req.user.id,
                     name: req.body.name,
                 }
-                await this.pService.add(paymentDTO);
-                res.status(200).send({ message: "결제수단 추가 성공" });
+                const newPayment = await this.pService.add(paymentDTO);
+                res.status(200).json(newPayment);
             } catch (err) {
                 res.status(400).send(err.message);
             }

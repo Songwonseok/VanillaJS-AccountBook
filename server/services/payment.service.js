@@ -24,8 +24,10 @@ class PaymentService {
                 user_id : paymentDTO.user_id,
                 payment_id: payment.id
             }
-            await this.paymentRepo.insert(userToPaymentDTO);
-
+            const insert = await this.paymentRepo.insert(userToPaymentDTO);
+            userToPaymentDTO.id =insert.id;
+            userToPaymentDTO.Payment = {name: payment.name};
+            return userToPaymentDTO;
         } catch (err) {
             throw err
         }
