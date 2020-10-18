@@ -35,8 +35,7 @@ class TransactionModel extends Observable {
 
     deleteItem = async (id) => {
         await deleteTransaction(id);
-        const item = this.list.find(e => e.id == id);
-        const index = this.list.indexOf(item);
+        const index = this.list.findIndex(e => e.id == id);
         const newlist = [...this.list];
         newlist.splice(index,1);
         this.list = newlist;

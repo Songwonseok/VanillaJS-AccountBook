@@ -56,34 +56,31 @@ class ListView{
         const dates = Object.keys(dateList);
 
         inner += filterView.render();
-        inner += `<div class="accountList">`
-        
-
-        dates.forEach(date => {
-            inner += `<div class="accountDate">
-                        <span class="day">${Number(date.slice(5, 7))}월${String(Number(date.slice(8))).padStart(2,' ')}일 ${DAY[new Date(date).getDay()]}</span>
-                        <span class="dayIncome">${(dateList[date].income > 0) ? ("+" + numberWithCommas(dateList[date].income.toString())+"원"):''}</span> 
+        inner += `<div class="accountList">
+        ${dates.reduce((acc,date) => {
+            return acc += `<div class="accountDate">
+                        <span class="day">${Number(date.slice(5, 7))}월${String(Number(date.slice(8))).padStart(2, ' ')}일 ${DAY[new Date(date).getDay()]}</span>
+                        <span class="dayIncome">${(dateList[date].income > 0) ? ("+" + numberWithCommas(dateList[date].income.toString()) + "원") : ''}</span> 
                         <span class="dayExpenditure">${(dateList[date].expenditure > 0) ? ("-" + numberWithCommas(dateList[date].expenditure.toString()) + "원") : ''}</span>
-                     </div>`
-            inner += dateList[date].reduce((acc, item) =>{
-                return acc += (item.Category.Classification.name === '지출')?
-                        `<div class="accountItem" data-id="${item.id}">
-                            <span class="itemCategory">${item.Category.name}</span> 
-                            <span class="itemContent">${item.content}</span>
-                            <span class="itemEditBtn"><i class="fas fa-edit"></i> 수정</span>
-                            <span class="itemPayment">${item.Payment.name}</span> 
-                            <span class="itemPrice">-${numberWithCommas(item.price.toString())}원</span>
-                        </div>`
-                    : `<div class="accountItem" data-id="${item.id}">
-                                <span class="itemCategory incomeItem">${item.Category.name}</span> 
-                                <span class="itemContent">${item.content}</span>
-                                <span class="itemEditBtn"><i class="fas fa-edit"></i> 수정</span>
-                                <span class="itemPayment">${item.Payment.name}</span> 
-                                <span class="itemPrice incomeItem">+${numberWithCommas(item.price.toString())}원</span>
-                            </div>`
-            }, '');
-        })
-        inner += `</div>`
+                     </div>
+                     ${dateList[date].reduce((acc, item) => {
+                        return acc += (item.Category.Classification.name === '지출') ?
+                            `<div class="accountItem" data-id="${item.id}">
+                                    <span class="itemCategory">${item.Category.name}</span> 
+                                    <span class="itemContent">${item.content}</span>
+                                    <span class="itemEditBtn"><i class="fas fa-edit"></i> 수정</span>
+                                    <span class="itemPayment">${item.Payment.name}</span> 
+                                    <span class="itemPrice">-${numberWithCommas(item.price.toString())}원</span>
+                                </div>`
+                            : `<div class="accountItem" data-id="${item.id}">
+                                        <span class="itemCategory incomeItem">${item.Category.name}</span> 
+                                        <span class="itemContent">${item.content}</span>
+                                        <span class="itemEditBtn"><i class="fas fa-edit"></i> 수정</span>
+                                        <span class="itemPayment">${item.Payment.name}</span> 
+                                        <span class="itemPrice incomeItem">+${numberWithCommas(item.price.toString())}원</span>
+                                    </div>`
+                    }, '')}`
+        },'')} </div>`
         return inner;
     }
 }

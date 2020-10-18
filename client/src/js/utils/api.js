@@ -1,6 +1,7 @@
 import authModel from '@models/authModel'
 
-const url = "http://115.85.182.190"
+const url = "http://localhost:3000"
+// const url = "http://115.85.182.190"
 
 export const getTransactionList = (month) => {
     return fetch(`${url}/api/transaction/${month}`, {
@@ -15,6 +16,21 @@ export const getTransactionList = (month) => {
         if (e.message === 'Unexpected token U in JSON at position 0')
             authModel.deleteToken();
     })
+}
+
+export const checkAuth = () => {
+    return fetch(`${url}/api/user/auth`, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.token}`
+        }
+    }).then((res) => res.json())
+        .catch(e => {
+            if (e.message === 'Unexpected token U in JSON at position 0')
+                authModel.deleteToken();
+        })
 }
 
 export const addTransaction = ((payload) => {
@@ -109,4 +125,36 @@ export const getPayment = () => {
                 authModel.deleteToken();
         })
 }
+
+export const addPayment = ((payload) => {
+    return fetch(`${url}/api/payment`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.token}`
+        },
+        body: JSON.stringify(payload)
+    }).then((res) => res.json())
+        .catch(e => {
+            if (e.message === 'Unexpected token U in JSON at position 0')
+                authModel.deleteToken();
+        })
+})
+
+
+export const deletePayment = ((id) => {
+    return fetch(`${url}/api/payment/${id}`, {
+        method: 'DELETE',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.token}`
+        }
+    }).then((res) => res.json())
+        .catch(e => {
+            if (e.message === 'Unexpected token U in JSON at position 0')
+                authModel.deleteToken();
+        })
+})
 

@@ -11,7 +11,10 @@ class UserController {
             try {
                 const id = req.user.id;
                 const userDTO = await this.uService.findUser(id);
-                res.status(200).json(userDTO);
+                if (userDTO)
+                    res.status(200).json(userDTO);
+                else
+                    res.status(401).json({data: false})
             } catch (err) {
                 res.status(400).send(err.message);
             }

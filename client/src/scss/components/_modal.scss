@@ -1,3 +1,4 @@
+@import '../common/variable';
 .paymentModal {
     position: fixed;
     top:0;
@@ -10,18 +11,118 @@
 }
 
 
-.modal_overlay{
+.modalOverlay{
     background-color: rgba(0,0,0,0.6);
     width: 100%;
     height: 100%;
     position: absolute;
 }
-.modal_content {
+.modalContent {
+    display: flex;
+    flex-direction: column;
     background-color: white;
-    padding: 20px 40px;
     text-align: center;
     position: relative;
     border-radius: 10px;
     width: 400px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.modalHeader{
+    display: flex;
+    flex-direction: column;
+    height: 60px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    border-radius: 10px 10px 0 0;
+    background-color: $mintColor;
+    width: 100%;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.modalCloseBtn {
+    color: white;
+    background-color: $mintColor;
+    border: none;
+    outline: none;
+    margin: 5px 5px 0 auto;
+    border-radius: 10px;
+    font-size: large;
+    cursor: pointer;
+}
+
+.modalTitle{
+    margin: 0 auto 0 auto;
+    font-size: large;
+}
+
+.addModalForm {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    padding: 0 20px 0 20px;
+    
+}
+
+.inputLabel{
+    margin: auto 0 auto 10px;
+    font-size: small;
+}
+.inputModal{
+    height: 35px;
+    flex:1;
+    margin: 10px 10px 10px 10px;
+    border: none;
+    outline: none;
+    border-bottom: solid;
+    border-width: 2px;
+    border-color: $backgrey;
+    text-align: center;
+}
+.modalAddBtn{
+    background-color: $mintColor;
+    border-radius: 32px;
+    color: white;
+    border:none;
+    width: 50px;
+    margin:10px 10px 10px 10px;
+}
+
+.paymentList {
+    border-top: solid 2px;
+    border-color: $backgrey;
+}
+
+.paymentItem{
+    height: 40px;
+    display: flex;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    // line-height: 40px;
+
+}
+
+.paymentItem:not(:last-child) {
+    border-bottom: solid 1px;
+    border-color: $backgrey;
+}
+
+.paymentName{
+    margin: auto;
+    padding-bottom: 5px;
+}
+
+.deletePaymentBtn {
+    position: relative;
+    right: 8%;
+    margin:5px;
+    border:none;
+    background-color: white;
+    font-weight: bold;
+    font-size: large;
+    color:$mintColor;
+    cursor: pointer;
+    outline: none;
 }

@@ -1,5 +1,5 @@
 @import 'common/reset', 'common/variable';
-@import 'components/header', 'components/nav', 'components/form', 'components/filter', 'components/statistic', 'components/calender';
+@import 'components/header', 'components/nav', 'components/form', 'components/filter', 'components/statistic', 'components/calender', 'components/modal';
 
 .no-select {
     -webkit-touch-callout: none;
@@ -8,6 +8,10 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.hidden {
+    display: none;
 }
 
 .content-wrap{

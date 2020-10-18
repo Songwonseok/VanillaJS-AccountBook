@@ -1,12 +1,19 @@
-import transactionModel from '@models/transactionModel'
-import NavView  from '@views/main/navView'
-import HeaderView from '@views/header/headerView'
 import '@fortawesome/fontawesome-free/js/all'
+
 import {$} from '@utils/common'
-import filterView from '@views/filter/filterView'
+import { checkAuth} from '@utils/api'
+
 import authModel from '@models/authModel'
+import transactionModel from '@models/transactionModel'
+import paymentModel from '@models/paymentModel'
 
 import loginView from '@views/auth/loginView'
+import filterView from '@views/filter/filterView'
+import headerView from '@views/header/headerView'
+
+import ModalView from '@views/modal/modalView'
+import NavView from '@views/main/navView'
+
 
 class App {
     constructor() {
@@ -23,12 +30,23 @@ class App {
 
     init = async() => {
         if(localStorage.token){
+            checkAuth();
+        }
+
+        if (localStorage.token){
             await transactionModel.getData((new Date().getMonth() + 1))
+            await paymentModel.getData();
+
             filterView.setModel(transactionModel);
             const navView = new NavView(transactionModel);
-            HeaderView.render(this.$appNode);
+            const modalView = new ModalView(paymentModel);
+
+            modalView.render(this.$appNode);
+            headerView.render(this.$appNode);
             navView.render(this.$appNode)
-            HeaderView.onEvent();
+
+            modalView.onEvent();
+            headerView.onEvent();
         }else{
             loginView.render();
         }
