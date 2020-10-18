@@ -9,12 +9,13 @@ export default class InputForm {
     }
 
     update = (data) => {
-
-        $('.userPayment').innerHTML = `<option value="" selected disabled hidden>선택</option>
+        if (location.pathname == '/') {
+            $('.userPayment').innerHTML = `<option value="" selected disabled hidden>선택</option>
                                         ${data.reduce((acc, e) => {
-                            return acc += `<option value="${e.payment_id}">${e.Payment.name}</option>`
-                        }, '')}`
-        this.onEvent();
+                return acc += `<option value="${e.payment_id}">${e.Payment.name}</option>`
+            }, '')}`
+            this.onEvent();
+        }
     }
 
 

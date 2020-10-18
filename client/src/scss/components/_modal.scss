@@ -93,6 +93,8 @@
 .paymentList {
     border-top: solid 2px;
     border-color: $backgrey;
+    height: 350px;
+    overflow-y: auto;
 }
 
 .paymentItem{
@@ -100,7 +102,6 @@
     display: flex;
     margin-top: 10px;
     padding-bottom: 10px;
-    // line-height: 40px;
 
 }
 

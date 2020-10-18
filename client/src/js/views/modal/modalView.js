@@ -65,7 +65,7 @@ class ModalView {
         e.preventDefault();
         const $form = $('.addModalForm');
         const name = $form.name.value;
-        if (name.replace(/ /gi, "").length ==0){
+        if (!name.replace(/ /gi, "").length){
             alert("이름을 입력해주세요")
             $form.name.value ='';
             return;
