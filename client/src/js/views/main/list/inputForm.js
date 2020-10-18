@@ -1,13 +1,24 @@
 import { $, numberWithCommas} from '@utils/common'
 import { addTransaction, editTransaction } from '@utils/api'
-import transactionModel from '@models/transactionModel'
 
 export default class InputForm {
-    constructor(model) {
-        this.model = model;
+    constructor(transactionModel,paymentModel) {
+        this.transactionModel = transactionModel;
+        this.model = paymentModel;
+        this.model.subscribe(this);
     }
 
-    render(item=undefined) {
+    update = (data) => {
+
+        $('.userPayment').innerHTML = `<option value="" selected disabled hidden>선택</option>
+                                        ${data.reduce((acc, e) => {
+                            return acc += `<option value="${e.payment_id}">${e.Payment.name}</option>`
+                        }, '')}`
+        this.onEvent();
+    }
+
+
+    render = (item=undefined) =>{
         if (item) 
             return this.editForm(item)
 
@@ -43,14 +54,11 @@ export default class InputForm {
                     </span>
                     <span>
                         <label>결제수단</label>
-                        <select name="payment">
+                        <select class="userPayment" name="payment">
                         <option value="" selected disabled hidden>선택</option>
-                        <option value="7">현금</option>
-                        <option value="3">체크카드</option>
-                        <option value="8">신용카드</option>
-                        <option value="1">국민카드</option>
-                        <option value="2">신한카드</option>
-                        <option value="9">T머니</option>
+                        ${this.model.list.reduce((acc,e) => {
+                            return acc += `<option value="${e.payment_id}">${e.Payment.name}</option>`
+                        },'')}
                         </select>
                     </span>
                     </div>
@@ -104,14 +112,11 @@ export default class InputForm {
         render += `</select> </span>
                        <span>
                         <label>결제수단</label>
-                        <select name="payment">
-                        <option value=""  disabled hidden>선택</option>
-                        <option value="7" ${(item.payment_id == 7) ? "selected='true'" : ""}>현금</option>
-                        <option value="3" ${(item.payment_id == 3) ?"selected='true'":""}>체크카드</option>
-                        <option value="8" ${(item.payment_id == 8) ? "selected='true'" : ""}>신용카드</option>
-                        <option value="1" ${(item.payment_id == 1) ? "selected='true'" : ""}>국민카드</option>
-                        <option value="2" ${(item.payment_id == 2) ? "selected='true'" : ""}>신한카드</option>
-                        <option value="9" ${(item.payment_id == 9) ? "selected='true'" : ""}>T머니</option>
+                        <select class="userPayment" name="payment">
+                        <option value=""  disabled hidden ${(!this.model.list.find(e => e.payment_id == item.payment_id)) ? "selected='true'" : "" }>선택</option>
+                        ${this.model.list.reduce((acc, e) => {
+                            return acc += `<option value="${e.payment_id}" ${(item.payment_id == e.payment_id) ? "selected='true'" : ""}>${e.Payment.name}</option>`
+                        }, '')}
                         </select>
                     </span>
                     </div>
@@ -157,7 +162,7 @@ export default class InputForm {
         e.preventDefault();
         if(confirm('정말 삭제하시겠습니까?')){
             const id = e.target.dataset.id;
-            await this.model.deleteItem(id);
+            await this.transactionModel.deleteItem(id);
         }
     }
 
@@ -226,7 +231,7 @@ export default class InputForm {
         }else {
             await addTransaction(payload);
         }
-        await this.model.changeData();
+        await this.transactionModel.changeData();
     }
 
     

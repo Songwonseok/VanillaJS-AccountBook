@@ -6,19 +6,20 @@ import { $, numberWithCommas, groupByDate } from '@utils/common'
 const DAY = ['일', '월', '화', '수', '목', '금', '토'];
 
 class ListView{
-    constructor(model){
-        this.model = model;
-        this.inputForm = new InputForm(model);
+    constructor(transactionModel, paymentModel){
+        this.model = transactionModel;
+        this.payment = paymentModel;
+        this.inputForm = new InputForm(transactionModel, paymentModel);
     }
 
     onEvent = () => {
+        console.log('listVIew');
         const $list = $('.accountList');
-        
-        this.inputForm.onEvent();
-        filterView.onEvent();
         $list.addEventListener('mouseover', this.onMouseOverItem)
         $list.addEventListener('mouseout', this.onMouseOutItem)
         $list.addEventListener('click', this.onClickEditBtn)
+        filterView.onEvent();
+        this.inputForm.onEvent();
     }
 
     onClickEditBtn = (e) => {
@@ -26,10 +27,12 @@ class ListView{
             const id = e.target.closest('.accountItem').dataset.id;
             const item = this.model.findOne(id);
             
-            $('form').outerHTML = this.inputForm.render(item);
+            $('.transactionForm').outerHTML = this.inputForm.render(item);
             const $btn = $('.submitBtn');
-            $btn.classList.remove('disabled');
-            $btn.disabled = false;
+            if (this.payment.list.find(e => e.payment_id == item.payment_id)){
+                $btn.classList.remove('disabled');
+                $btn.disabled = false;
+            }
             this.inputForm.onEvent();
         }
     }
@@ -49,12 +52,9 @@ class ListView{
     }
 
     render = (list) => {
-
-        let inner = this.inputForm.render();
-
         const dateList = groupByDate(list);
         const dates = Object.keys(dateList);
-
+        let inner = this.inputForm.render();
         inner += filterView.render();
         inner += `<div class="accountList">
         ${dates.reduce((acc,date) => {

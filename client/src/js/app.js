@@ -38,7 +38,7 @@ class App {
             await paymentModel.getData();
 
             filterView.setModel(transactionModel);
-            const navView = new NavView(transactionModel);
+            const navView = new NavView(transactionModel, paymentModel);
             const modalView = new ModalView(paymentModel);
 
             modalView.render(this.$appNode);

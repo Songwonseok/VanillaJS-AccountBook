@@ -5,12 +5,12 @@ import CalenderView from '@views/main/calender/calenderView'
 import filterView from '@views/filter/filterView'
 
 export default class NavView {
-    constructor(model) {
+    constructor(transactionModel, paymentModel) {
         this.currentMonth = new Date().getMonth() + 1;
-        this.model = model;
-        this.listView = new ListView(model);
-        this.statisticView = new StatisticView(model);
-        this.calenderView = new CalenderView(model);
+        this.model = transactionModel;
+        this.listView = new ListView(transactionModel, paymentModel);
+        this.statisticView = new StatisticView(transactionModel);
+        this.calenderView = new CalenderView(transactionModel);
         this.model.subscribe(this);
     }
 
