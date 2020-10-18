@@ -13,7 +13,6 @@ class ListView{
     }
 
     onEvent = () => {
-        console.log('listVIew');
         const $list = $('.accountList');
         $list.addEventListener('mouseover', this.onMouseOverItem)
         $list.addEventListener('mouseout', this.onMouseOutItem)
