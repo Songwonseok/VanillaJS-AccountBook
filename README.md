@@ -4,6 +4,13 @@ Vanilla JS를 이용한 가계부 웹서비스 구현
 
 -----
 
+## Installation
+```
+npm i
+npx webpack
+npm start
+```
+
 ## 주간 계획서 1주차
 
 ### 월 09/28
