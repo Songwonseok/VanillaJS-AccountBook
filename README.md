@@ -92,9 +92,8 @@ Vanilla JS를 이용한 가계부 웹서비스 구현
 ## 데모
 
 URL : http://115.85.182.190/
-
-> ID : boost
-> PW : camp
+> - ID : boost
+> - PW : camp
 
 
 
