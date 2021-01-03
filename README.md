@@ -98,7 +98,7 @@ npm start
 
 ## 데모
 
-URL : http://115.85.182.190/
+URL : ~~http://115.85.182.190/~~
 > - ID : boost
 > - PW : camp
 
